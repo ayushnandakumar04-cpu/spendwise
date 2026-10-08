@@ -1,0 +1,18 @@
+#
+###
+
+POST  http://127.0.0.1:8000/v1/spending/signup/
+Content-Type: application/json
+
+{
+    "username":"Django",
+    "email":"django@gmail.com",
+    "password":"password$23"
+}
+
+#
+###
+
+GET  http://127.0.0.1:8000/v1/spending/Me/
+Accept: application/json
+Authorization: Basic Django:password$23
