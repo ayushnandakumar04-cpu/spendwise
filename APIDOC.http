@@ -16,3 +16,58 @@ Content-Type: application/json
 GET  http://127.0.0.1:8000/v1/spending/Me/
 Accept: application/json
 Authorization: Basic Django:password$23
+
+#
+###
+
+GET  http://127.0.0.1:8000/v1/spending/expense/
+Accept : application/json
+Authorization: Basic Django:password$23
+
+#
+###
+
+POST http://127.0.0.1:8000/v1/spending/expense/ 
+Content-Type: application/json
+Authorization: Basic Django:password$23
+
+{
+    "title":"about",
+    "amount":9000,
+    "category":"OTHER",
+    "priority":"need",
+    "payment_method":"upi"
+}
+
+#
+###
+
+GET http://127.0.0.1:8000/v1/spending/expense/1/
+Accept: application/json
+Authorization: Basic Django:password$23
+
+#
+###
+
+PUT http://127.0.0.1:8000/v1/spending/expense/2/
+Content-Type: application/json
+Authorization: Basic Django:password$23
+
+{
+    "title":"buy",
+    "amount":6000,
+    "category":"OTHER",
+    "priority":"need",
+    "payment_method":"cash"
+}
+
+#
+###
+
+DELETE http://127.0.0.1:8000/v1/spending/expense/3/
+Content-Type: application/json
+Authorization: Basic Django:password$23
+
+{
+    "id":2
+}
