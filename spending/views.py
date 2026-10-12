@@ -39,7 +39,7 @@ class GetMeView(APIView):
         return Response(data=serializer_instance.data)
 
 class ExpenseListCreateView(APIView):
-    authentication_classes=[authentication.BasicAuthentication]
+    authentication_classes=[authentication.TokenAuthentication]
     permission_classes=[permissions.IsAuthenticated]
 
     def get(self,request):
@@ -57,7 +57,7 @@ class ExpenseListCreateView(APIView):
             return Response(data=serializer_instance.errors)
 
 class ExpenseListRetrieveview(APIView):
-     authentication_classes=[authentication.BasicAuthentication]
+     authentication_classes=[authentication.TokenAuthentication]
      permission_classes=[IsOwner]
 
      def get(self,request,pk=None):

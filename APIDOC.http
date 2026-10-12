@@ -33,22 +33,24 @@ Authorization: Token e115dac08b6b256502543bd5afc8fbee52249e8d
 
 GET  http://127.0.0.1:8000/v1/spending/expense/
 Accept : application/json
-Authorization: Basic Django:password$23
+#Authorization: Basic Django:password$23
+Authorization: Token e115dac08b6b256502543bd5afc8fbee52249e8d
 
 #
 ###
 
 POST http://127.0.0.1:8000/v1/spending/expense/ 
 Content-Type: application/json
-Authorization: Basic Django:password$23
+#Authorization: Basic Django:password$23
+Authorization: Token e115dac08b6b256502543bd5afc8fbee52249e8d
 
 {
    
-  "title": "about",
-  "amount": "9000.00",
+  "title": "night",
+  "amount": "900.00",
   "category": "OTHER",
   "priority": "need",
-  "payment_method": "upi",
+  "payment_method": "cash"
   
 }
 
@@ -58,23 +60,25 @@ Authorization: Basic Django:password$23
 #
 ###
 
-GET http://127.0.0.1:8000/v1/spending/expense/1/
+GET http://127.0.0.1:8000/v1/spending/expense/6/
 Accept: application/json
-Authorization: Basic rect:jang$23
+#Authorization: Basic rect:jang$23
+Authorization:Token e115dac08b6b256502543bd5afc8fbee52249e8d
 #
 ###
 
-PUT http://127.0.0.1:8000/v1/spending/expense/5/
+PUT http://127.0.0.1:8000/v1/spending/expense/6/
 Content-Type: application/json
-Authorization: Basic rect:jang$23
+#Authorization: Basic rect:jang$23
+Authorization: Token e115dac08b6b256502543bd5afc8fbee52249e8d
 
 {
   
   "title": "about",
-  "amount": "9000.00",
+  "amount": "10000.00",
   "category": "OTHER",
   "priority": "need",
-  "payment_method": "upi",
+  "payment_method": "upi"
   
   
 }
@@ -82,10 +86,11 @@ Authorization: Basic rect:jang$23
 #
 ###
 
-DELETE http://127.0.0.1:8000/v1/spending/expense/4/
+DELETE http://127.0.0.1:8000/v1/spending/expense/6/
 Content-Type: application/json
-Authorization: Basic Django:password$23
+#Authorization: Basic Django:password$23
+Authorization: Token e115dac08b6b256502543bd5afc8fbee52249e8d
 
 {
-    "id":4
+    "id":6
 }
