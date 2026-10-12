@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from rest_framework import authentication,permissions
 from rest_framework.response import Response
 from spending.models import Expense
-
+from spending.app_permissions import IsOwner
 
 class SignUpRegisterview(APIView):
 
@@ -24,8 +24,8 @@ class SignUpRegisterview(APIView):
             return Response(data=serializer_instance.errors)
 
 class GetMeView(APIView):
-    authentication_classes=[authentication.BasicAuthentication]
-
+    #authentication_classes=[authentication.BasicAuthentication]
+    authentication_classes=[authentication.TokenAuthentication]
     permission_classes=[permissions.IsAuthenticated]
 
     def get(self,request):
@@ -58,15 +58,17 @@ class ExpenseListCreateView(APIView):
 
 class ExpenseListRetrieveview(APIView):
      authentication_classes=[authentication.BasicAuthentication]
-     permission_classes=[permissions.IsAuthenticated]
+     permission_classes=[IsOwner]
 
      def get(self,request,pk=None):
         qs=get_object_or_404(Expense,id=pk)
+        self.check_object_permissions(request,qs)
         serializer_instance=ExpenseSerializers(qs)
         return Response(data=serializer_instance.data)
      
      def put(self,request,pk=None):
          instance=get_object_or_404(Expense,id=pk)
+         self.check_object_permissions(request,instance)
          form_data=request.data
          serializer_instance=ExpenseSerializers(data=form_data,instance=instance)
          if serializer_instance.is_valid(): 
@@ -78,5 +80,9 @@ class ExpenseListRetrieveview(APIView):
 
      def delete(self,request,pk=None):
          instance=get_object_or_404(Expense,id=pk)
+         self.check_object_permissions(request,instance)
          instance.delete()
          return Response({"message": "Expense deleted successfully"})
+
+
+     

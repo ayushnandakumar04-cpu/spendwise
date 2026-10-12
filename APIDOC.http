@@ -5,17 +5,28 @@ POST  http://127.0.0.1:8000/v1/spending/signup/
 Content-Type: application/json
 
 {
-    "username":"Django",
-    "email":"django@gmail.com",
-    "password":"password$23"
+    "username":"rect",
+    "email":"rect@gmail.com",
+    "password":"jang$23"
 }
 
 #
 ###
 
+POST http://127.0.0.1:8000/v1/spending/token/
+Content-Type: application/json
+
+{
+    "username":"rect",
+    "password":"jang$23"
+
+}
+#
+###
+
 GET  http://127.0.0.1:8000/v1/spending/Me/
 Accept: application/json
-Authorization: Basic Django:password$23
+Authorization: Token e115dac08b6b256502543bd5afc8fbee52249e8d
 
 #
 ###
@@ -32,42 +43,49 @@ Content-Type: application/json
 Authorization: Basic Django:password$23
 
 {
-    "title":"about",
-    "amount":9000,
-    "category":"OTHER",
-    "priority":"need",
-    "payment_method":"upi"
+   
+  "title": "about",
+  "amount": "9000.00",
+  "category": "OTHER",
+  "priority": "need",
+  "payment_method": "upi",
+  
 }
+
+
+
 
 #
 ###
 
 GET http://127.0.0.1:8000/v1/spending/expense/1/
 Accept: application/json
-Authorization: Basic Django:password$23
-
+Authorization: Basic rect:jang$23
 #
 ###
 
-PUT http://127.0.0.1:8000/v1/spending/expense/2/
+PUT http://127.0.0.1:8000/v1/spending/expense/5/
 Content-Type: application/json
-Authorization: Basic Django:password$23
+Authorization: Basic rect:jang$23
 
 {
-    "title":"buy",
-    "amount":6000,
-    "category":"OTHER",
-    "priority":"need",
-    "payment_method":"cash"
+  
+  "title": "about",
+  "amount": "9000.00",
+  "category": "OTHER",
+  "priority": "need",
+  "payment_method": "upi",
+  
+  
 }
 
 #
 ###
 
-DELETE http://127.0.0.1:8000/v1/spending/expense/3/
+DELETE http://127.0.0.1:8000/v1/spending/expense/4/
 Content-Type: application/json
 Authorization: Basic Django:password$23
 
 {
-    "id":2
+    "id":4
 }

@@ -23,5 +23,6 @@ urlpatterns = [
 
     # ==== spending ====
     path("v1/spending/",include("spending.urls"))
+    
    
 ]
