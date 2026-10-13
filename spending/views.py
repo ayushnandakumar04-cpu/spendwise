@@ -8,7 +8,8 @@ from rest_framework import authentication,permissions
 from rest_framework.response import Response
 from spending.models import Expense
 from spending.app_permissions import IsOwner
-
+from datetime import datetime
+from django.db.models import Sum
 class SignUpRegisterview(APIView):
 
     def post(self,request):
@@ -83,6 +84,33 @@ class ExpenseListRetrieveview(APIView):
          self.check_object_permissions(request,instance)
          instance.delete()
          return Response({"message": "Expense deleted successfully"})
+
+class ExpenseSummaryView(APIView):
+    authentication_classes=[authentication.TokenAuthentication]
+    permission_classes=[permissions.IsAuthenticated]
+    def get(self,request):
+        response_data={
+            "total_today":0
+        }
+        cur_date=datetime.now().date()
+        cur_month=datetime.now().month
+        cur_year=datetime.now().year
+
+        monthly_transactions=Expense.objects.filter(owner=request.user,created_at__month=cur_month,created_at__year=cur_year)
+        if monthly_transactions:
+            monthly_total=monthly_transactions.values("amount").aggregate(total=Sum("amount")).get("total")
+            response_data["monthly_total"]=monthly_total
+        todays_transaction=Expense.objects.filter(owner=request.user,created_at__date=cur_date)
+        if todays_transaction:
+            total_today=todays_transaction.values("amount").aggregate(total=Sum("amount")).get("total")
+            #todays category
+            category=todays_transaction.values("category").annotate(total=Sum("amount"))
+
+            #response_data={"total_today":total_today}
+            #response_data={"total_category":category}
+            #monthly
+
+        return Response(data=response_data)
 
 
      

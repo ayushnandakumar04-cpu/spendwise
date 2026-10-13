@@ -1,6 +1,6 @@
 from django.urls import path
 from spending.views import SignUpRegisterview,GetMeView,ExpenseListCreateView,ExpenseListRetrieveview
-from spending.app_permissions import BasePermission,IsOwner
+from spending.views import ExpenseSummaryView
 from rest_framework.authtoken.views import ObtainAuthToken
 urlpatterns=[
 
@@ -11,5 +11,7 @@ urlpatterns=[
     path("expense/<int:pk>/",ExpenseListRetrieveview.as_view()),
 
     path("token/",ObtainAuthToken.as_view()),
+
+    path("summary/",ExpenseSummaryView.as_view()),
 
 ]

@@ -46,9 +46,9 @@ Authorization: Token e115dac08b6b256502543bd5afc8fbee52249e8d
 
 {
    
-  "title": "night",
+  "title": "recharge",
   "amount": "900.00",
-  "category": "OTHER",
+  "category": "BILLS",
   "priority": "need",
   "payment_method": "cash"
   
@@ -67,7 +67,7 @@ Authorization:Token e115dac08b6b256502543bd5afc8fbee52249e8d
 #
 ###
 
-PUT http://127.0.0.1:8000/v1/spending/expense/6/
+PUT http://127.0.0.1:8000/v1/spending/expense/7/
 Content-Type: application/json
 #Authorization: Basic rect:jang$23
 Authorization: Token e115dac08b6b256502543bd5afc8fbee52249e8d
@@ -86,11 +86,18 @@ Authorization: Token e115dac08b6b256502543bd5afc8fbee52249e8d
 #
 ###
 
-DELETE http://127.0.0.1:8000/v1/spending/expense/6/
+DELETE http://127.0.0.1:8000/v1/spending/expense/7/
 Content-Type: application/json
 #Authorization: Basic Django:password$23
 Authorization: Token e115dac08b6b256502543bd5afc8fbee52249e8d
 
 {
-    "id":6
+    "id":7
 }
+
+#api call for list
+###
+
+GET http://127.0.0.1:8000/v1/spending/summary/
+Accept: application/json
+Authorization: Token e115dac08b6b256502543bd5afc8fbee52249e8d
