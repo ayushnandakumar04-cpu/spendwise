@@ -46,9 +46,9 @@ Authorization: Token e115dac08b6b256502543bd5afc8fbee52249e8d
 
 {
    
-  "title": "recharge",
+  "title": "Dance",
   "amount": "900.00",
-  "category": "BILLS",
+  "category": "ENTERTAINMENT",
   "priority": "need",
   "payment_method": "cash"
   
@@ -67,21 +67,22 @@ Authorization:Token e115dac08b6b256502543bd5afc8fbee52249e8d
 #
 ###
 
-PUT http://127.0.0.1:8000/v1/spending/expense/7/
+PUT http://127.0.0.1:8000/v1/spending/expense/8/
 Content-Type: application/json
 #Authorization: Basic rect:jang$23
 Authorization: Token e115dac08b6b256502543bd5afc8fbee52249e8d
 
 {
   
-  "title": "about",
-  "amount": "10000.00",
-  "category": "OTHER",
+  "title": "chiken",
+  "amount": "200.00",
+  "category": "FOOD",
   "priority": "need",
   "payment_method": "upi"
   
   
 }
+
 
 #
 ###
@@ -99,5 +100,12 @@ Authorization: Token e115dac08b6b256502543bd5afc8fbee52249e8d
 ###
 
 GET http://127.0.0.1:8000/v1/spending/summary/
+Accept: application/json
+Authorization: Token e115dac08b6b256502543bd5afc8fbee52249e8d
+
+#
+###
+
+GET http://127.0.0.1:8000/v1/spending/budget/
 Accept: application/json
 Authorization: Token e115dac08b6b256502543bd5afc8fbee52249e8d

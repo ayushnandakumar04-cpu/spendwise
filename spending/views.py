@@ -10,6 +10,7 @@ from spending.models import Expense
 from spending.app_permissions import IsOwner
 from datetime import datetime
 from django.db.models import Sum
+from spending.ai_service import get_budget_plan
 class SignUpRegisterview(APIView):
 
     def post(self,request):
@@ -113,4 +114,23 @@ class ExpenseSummaryView(APIView):
         return Response(data=response_data)
 
 
-     
+class BudgetPlanView(APIView):
+       authentication_classes=[authentication.TokenAuthentication]
+       permission_classes=[permissions.IsAuthenticated]
+
+       def get (self,request):
+           user=request.user
+           #monthly total
+        
+           curr_month=datetime.now().month
+           curr_year=datetime.now().year
+
+           response_data={"monthly_Expense_total":0}
+           monthly_transations=Expense.objects.filter(owner=request.user,created_at__month=curr_month,created_at__year=curr_year)
+           if monthly_transations:
+               monthly_total=monthly_transations.values("amount").aggregate(monthly_total=Sum("amount")).get("total")
+               response_data["monthly_total"]=monthly_total
+               category_summary=monthly_transations.values("category").annotate(total=Sum("amount"))
+               response_data["category_summary"]=category_summary
+               get_budget_plan(response_data)
+           return Response(response_data)
