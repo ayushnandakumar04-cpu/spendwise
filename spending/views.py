@@ -121,16 +121,18 @@ class BudgetPlanView(APIView):
        def get (self,request):
            user=request.user
            #monthly total
-        
+           
+           response_data={"monthly_Expense_total":0}
            curr_month=datetime.now().month
            curr_year=datetime.now().year
 
-           response_data={"monthly_Expense_total":0}
-           monthly_transations=Expense.objects.filter(owner=request.user,created_at__month=curr_month,created_at__year=curr_year)
+           monthly_transations=Expense.objects.filter(owner=user,created_at__month=curr_month,created_at__year=curr_year)
            if monthly_transations:
                monthly_total=monthly_transations.values("amount").aggregate(monthly_total=Sum("amount")).get("total")
                response_data["monthly_total"]=monthly_total
                category_summary=monthly_transations.values("category").annotate(total=Sum("amount"))
                response_data["category_summary"]=category_summary
-               get_budget_plan(response_data)
+               budget_plan=get_budget_plan(response_data)
+               response_data["plan"]=budget_plan
            return Response(response_data)
+       
